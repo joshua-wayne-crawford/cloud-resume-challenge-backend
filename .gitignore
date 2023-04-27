@@ -396,3 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+#Terraform
+.tfvars
+
+#executable
+terraform-provider-azurerm_v3.53.0_x5.exe
