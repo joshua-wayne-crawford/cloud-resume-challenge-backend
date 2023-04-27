@@ -1,0 +1,5 @@
+region = "eastus"
+subscription = "josh-sub"
+resource_group = "ResumeWebsite"
+storage_account_name = "jwcresumewebsite"
+storage_account_access_key = "WmdDf8zfUOWRMtwFF47lMQZvuV9LHDb2+rQRBKr/DhDTcWbJN3QpGI85Btv9KYlHQhqc8VIm3LB9+AStlTJLpg=="
