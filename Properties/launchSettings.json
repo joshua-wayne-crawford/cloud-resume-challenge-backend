@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "cloud_resume_challenge_backend": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7129",
+      "launchBrowser": false
+    }
+  }
+}
