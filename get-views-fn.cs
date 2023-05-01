@@ -4,7 +4,10 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Azure.Data.Tables;
+using Microsoft.Azure.Cosmos.Table;
 using Azure;
+using System;
+using Microsoft.Extensions.Configuration;
 
 namespace Resume.Functions
 {
@@ -15,9 +18,11 @@ namespace Resume.Functions
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            string connectionString = System.Environment.GetEnvironmentVariable("connection_string");
+            var config = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory).AddJsonFile("local.settings.json", true, true).Build();
+            string connectionString = Environment.GetEnvironmentVariable("connection_string",EnvironmentVariableTarget.Process);
             string tableName = "views";
             int views = 10;
+
             TableClient tableClient = new TableClient(connectionString, tableName);
 
             Pageable<TableEntity> results = tableClient.Query<TableEntity>(entity => entity.PartitionKey == "views");

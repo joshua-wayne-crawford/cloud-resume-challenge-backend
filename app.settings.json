@@ -1,0 +1,5 @@
+{
+    "ConnectionStrings": {
+        "connection_string": "DefaultEndpointsProtocol=https;AccountName=jwcresumewebsite;AccountKey=IykMexpq/c+qXG7f9kCjUg/wGrKXUtuevlYtI1SiMg+CsfWyM8d7clEafsDnljbUr7MQeGm6ffGg+ASteNOCLA==;EndpointSuffix=core.windows.net"
+    }
+}
