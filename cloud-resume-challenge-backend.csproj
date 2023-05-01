@@ -5,6 +5,8 @@
     <RootNamespace>cloud_resume_challenge_backend</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Azure.Data.Tables" Version="12.8.0" />
+    <PackageReference Include="Microsoft.Azure.Cosmos.Table" Version="1.0.8" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.1.1" />
   </ItemGroup>
   <ItemGroup>
