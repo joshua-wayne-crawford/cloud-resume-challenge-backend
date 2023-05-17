@@ -4,7 +4,6 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Azure.Data.Tables;
-using Microsoft.Azure.Cosmos.Table;
 using Azure;
 using System;
 using Microsoft.Extensions.Configuration;
@@ -15,11 +14,10 @@ namespace Resume.Functions
     {
         [FunctionName("get_views_fn")]
         public static async Task<int> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req)
         {
             var config = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory).AddJsonFile("local.settings.json", true, true).Build();
-            string connectionString = Environment.GetEnvironmentVariable("connection_string",EnvironmentVariableTarget.Process);
+            string connectionString = config["ConnectionStrings:connection_string"];
             string tableName = "views";
             int views = 10;
 
@@ -48,10 +46,7 @@ namespace Resume.Functions
             foreach (TableEntity tableEntity in result)
             {
                 views = tableEntity.views;
-            }
-
-
-            log.LogInformation("C# HTTP trigger function processed a request."); 
+            } 
 
             return views;
         }
