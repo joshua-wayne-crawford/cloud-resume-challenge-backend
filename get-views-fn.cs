@@ -16,7 +16,7 @@ namespace Resume.Functions
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req)
         {
             var config = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory).AddJsonFile("local.settings.json",true, true).AddEnvironmentVariables().Build();
-            string connectionString = Environment.GetEnvironmentVariable("ConnectionStrings:connection_string:connection_string",EnvironmentVariableTarget.Process);
+            string connectionString = Environment.GetEnvironmentVariable("ConnectionStrings:connection_string:ConnectionString",EnvironmentVariableTarget.Process);
             string tableName = "views";
             int views = 10;
 
