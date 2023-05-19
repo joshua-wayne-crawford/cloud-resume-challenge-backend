@@ -17,6 +17,7 @@ namespace Resume.Functions
         {
             var config = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory).AddJsonFile("local.settings.json",true, true).AddEnvironmentVariables().Build();
             string connectionString = Environment.GetEnvironmentVariable("connection_string",EnvironmentVariableTarget.Process);
+            Console.WriteLine($"WOAH KENNY {connectionString}");
             string tableName = "views";
             int views = 10;
 
