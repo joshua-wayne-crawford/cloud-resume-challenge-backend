@@ -16,36 +16,45 @@ namespace Resume.Functions
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req)
         {
             var config = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory).AddJsonFile("local.settings.json",true, true).AddEnvironmentVariables().Build();
-            string connectionString = Environment.GetEnvironmentVariable("ConnectionStrings:connection_string:ConnectionString",EnvironmentVariableTarget.Process);
+            string connectionString = Environment.GetEnvironmentVariable("connection_string",EnvironmentVariableTarget.Process);
             string tableName = "views";
             int views = 10;
 
-            TableClient tableClient = new TableClient(connectionString, tableName);
+            try{
+                TableClient tableClient = new TableClient(connectionString, tableName);
 
-            Pageable<TableEntity> results = tableClient.Query<TableEntity>(entity => entity.PartitionKey == "views");
+                Pageable<TableEntity> results = tableClient.Query<TableEntity>(entity => entity.PartitionKey == "views");
 
-            foreach (TableEntity tableEntity in results)
-            {
-                views = tableEntity.views;
+                foreach (TableEntity tableEntity in results)
+                {
+                    views = tableEntity.views;
+                }
+
+                
+                TableEntity entity = new TableEntity()
+                {
+                    PartitionKey = "views",
+                    RowKey = "0",
+                    views = views+1
+                };
+
+                tableClient.UpsertEntity(entity);
+
+                
+                Pageable<TableEntity> result = tableClient.Query<TableEntity>(entity => entity.PartitionKey == "views");
+
+                foreach (TableEntity tableEntity in result)
+                {
+                    views = tableEntity.views;
+                } 
+
+                return views;
             }
-
-            
-            TableEntity entity = new TableEntity()
+            catch(Exception ex)
             {
-                PartitionKey = "views",
-                RowKey = "0",
-                views = views+1
-            };
-
-            tableClient.UpsertEntity(entity);
-
+                Console.WriteLine(ex);
+            }
             
-            Pageable<TableEntity> result = tableClient.Query<TableEntity>(entity => entity.PartitionKey == "views");
-
-            foreach (TableEntity tableEntity in result)
-            {
-                views = tableEntity.views;
-            } 
 
             return views;
         }
