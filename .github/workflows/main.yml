@@ -23,5 +23,5 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       - name: Test
         env: 
-          ConnectionStrings.Default: ${{ secrets.CONNECTION_STRING }}
+          connection_string: ${{ secrets.CONNECTION_STRING }}
         run: dotnet test --no-restore --verbosity normal
