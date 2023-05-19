@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Azure.Data.Tables;
 using Azure;
 using System;
@@ -16,8 +15,8 @@ namespace Resume.Functions
         public static async Task<int> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req)
         {
-            var config = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory).AddJsonFile("local.settings.json", true, true).Build();
-            string connectionString = config["ConnectionStrings:connection_string"];
+            var config = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory).AddJsonFile("local.settings.json",true, true).AddEnvironmentVariables().Build();
+            string connectionString = Environment.GetEnvironmentVariable("connection_string",EnvironmentVariableTarget.Process);
             string tableName = "views";
             int views = 10;
 

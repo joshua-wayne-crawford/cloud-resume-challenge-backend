@@ -12,12 +12,13 @@ namespace Resume
     [TestClass]
     public class AzFunctionTest
     {
-        private static string connectionString;
+        private static string connString;
         [ClassInitialize]
         public static void Init(TestContext context)
         {
             var config = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory).AddJsonFile("local.settings.json", true, true).Build();
-            connectionString = config["ConnectionStrings:connection_string"];
+            Environment.SetEnvironmentVariable("connection_string", config["ConnectionStrings:connection_string:ConnectionString"]);
+            connString = config["ConnectionStrings:connection_string:ConnectionString"];
         }
 
         [TestMethod]
@@ -29,7 +30,7 @@ namespace Resume
             var httpContext = new DefaultHttpContext();
 
             //get initial count
-            TableClient tableClient = new TableClient(connectionString, tableName);
+            TableClient tableClient = new TableClient(connString, tableName);
 
             Pageable<TableEntity> results = tableClient.Query<TableEntity>(entity => entity.PartitionKey == "views");
 
