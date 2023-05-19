@@ -1,9 +1,7 @@
 name: dotnet package
 
 on: [push]
-env: 
-  connection_string: ${{ secrets.CONNECTION_STRING }}
-  run: echo $"connection_string"
+
 jobs:
   build:
 
