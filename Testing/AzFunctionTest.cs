@@ -16,7 +16,8 @@ namespace Resume
         [ClassInitialize]
         public static void Init(TestContext context)
         {
-            //var config = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory).AddJsonFile("local.settings.json", true, true).AddEnvironmentVariables().Build();
+            var config = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory).AddJsonFile("local.settings.json", true, true).AddEnvironmentVariables().Build();
+            Environment.SetEnvironmentVariable("connection_string", config["Values:connection_string"]);
             connString = Environment.GetEnvironmentVariable("connection_string",EnvironmentVariableTarget.Process);
         }
 
@@ -40,7 +41,7 @@ namespace Resume
                 resultBeforeFunctionCall = tableEntity.views;
             }
 
-            Assert.IsTrue(0 > 1, "You got to right before the function runs");
+
             //call function to get new count
             resultAfterFunctionCall = await Run(httpContext.Request);
 
