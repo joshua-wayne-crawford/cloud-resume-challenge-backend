@@ -33,7 +33,7 @@ namespace Resume
 
             //get initial count
             TableClient tableClient = new TableClient(connString, tableName);
-
+            Assert.IsTrue(0 > 1, "WOAH KENNY YOU GOT TO BEFORE THE AZ FUNCTION RUNS");
             Pageable<TableEntity> results = tableClient.Query<TableEntity>(entity => entity.PartitionKey == "views");
 
             foreach (TableEntity tableEntity in results)
@@ -41,7 +41,6 @@ namespace Resume
                 resultBeforeFunctionCall = tableEntity.views;
             }
 
-            Assert.IsTrue(0 > 1, "WOAH KENNY YOU GOT TO BEFORE THE AZ FUNCTION RUNS");
             //call function to get new count
             resultAfterFunctionCall = await Run(httpContext.Request);
 
