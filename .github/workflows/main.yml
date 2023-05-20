@@ -1,11 +1,11 @@
 name: dotnet package
 
 on: [push]
-env:
-  connection_string: ${{ secrets.CONNECTION_STRING }}
 jobs:
   build:
-    runs-on: windows-latest
+    env:
+      connection_string: ${{ secrets.DB_CONNECTION }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         dotnet-version: [ '6.0.x' ]
