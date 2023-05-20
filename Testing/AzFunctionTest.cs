@@ -17,8 +17,7 @@ namespace Resume
         public static void Init(TestContext context)
         {
             var config = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory).AddJsonFile("local.settings.json", true, true).AddEnvironmentVariables().Build();
-            Environment.SetEnvironmentVariable("connection_string", config["Values:connection_string"], EnvironmentVariableTarget.Process);
-            connString = config["Values:connection_string"];
+            connString = Environment.GetEnvironmentVariable("connection_string",EnvironmentVariableTarget.Process);
         }
 
         [TestMethod]
