@@ -16,7 +16,7 @@ namespace Resume
         [ClassInitialize]
         public static void Init(TestContext context)
         {
-            var config = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory).AddJsonFile("local.settings.json", true, true).Build();
+            var config = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory).AddJsonFile("local.settings.json", true, true).AddEnvironmentVariables().Build();
             Environment.SetEnvironmentVariable("connection_string", config["ConnectionStrings:connection_string:ConnectionString"], EnvironmentVariableTarget.Process);
             connString = config["ConnectionStrings:connection_string:ConnectionString"];
         }
@@ -28,8 +28,6 @@ namespace Resume
             int resultAfterFunctionCall = 0;
             string tableName = "views";
             var httpContext = new DefaultHttpContext();
-            var config = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory).AddJsonFile("local.settings.json", true, true).Build();
-            Environment.SetEnvironmentVariable("connection_string", config["ConnectionStrings:connection_string:ConnectionString"], EnvironmentVariableTarget.Process);
 
             //get initial count
             TableClient tableClient = new TableClient(connString, tableName);
