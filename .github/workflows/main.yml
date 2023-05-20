@@ -2,7 +2,7 @@ name: dotnet package
 
 on: [push]
 env:
-  connection_string: ${{ secrets.CONNECTION_STRING }}
+  connection_string: ${{ vars.connection_string }}
 jobs:
   build:
     runs-on: windows-latest
@@ -23,7 +23,5 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
       - name: Test
-        env:
-          connection_string: ${{ secrets.CONNECTION_STRING }}
         run: dotnet test --verbosity normal
 
