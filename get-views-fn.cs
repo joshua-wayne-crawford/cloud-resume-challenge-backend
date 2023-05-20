@@ -15,7 +15,6 @@ namespace Resume.Functions
         public static async Task<int> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req)
         {
-            var config = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory).AddJsonFile("local.settings.json",true, true).AddEnvironmentVariables().Build();
             string connectionString = Environment.GetEnvironmentVariable("connection_string",EnvironmentVariableTarget.Process);
             string tableName = "views";
             int views = 10;
