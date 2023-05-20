@@ -1,10 +1,10 @@
 name: dotnet package
 
 on: [push]
-
+env:
+  connection_string: ${{ secrets.CONNECTION_STRING }}
 jobs:
   build:
-
     runs-on: windows-latest
     strategy:
       matrix:
@@ -23,5 +23,7 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
       - name: Test
-        run: dotnet test --no-restore --verbosity normal
+        env:
+          connection_string: ${{ secrets.CONNECTION_STRING }}
+        run: dotnet test --verbosity normal
 
