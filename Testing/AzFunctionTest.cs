@@ -29,7 +29,7 @@ namespace Resume
             string tableName = "views";
             var httpContext = new DefaultHttpContext();
 
-            Assert.IsTrue(connString != null, "connection should not be null!");
+            Assert.IsTrue(connString != null, $"connection should not be null! {connString}");
 
             //get initial count
             TableClient tableClient = new TableClient(connString, tableName);
