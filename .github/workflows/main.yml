@@ -6,6 +6,7 @@ jobs:
   build:
     env:
       Values:connection_string: ${{ secrets.CONNECTION_STRING }}
+      connection_string: ${{ secrets.CONNECTION_STRING }}
 
     runs-on: ubuntu-latest
     strategy:
