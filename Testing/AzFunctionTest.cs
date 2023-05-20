@@ -28,7 +28,7 @@ namespace Resume
             int resultAfterFunctionCall = 0;
             string tableName = "views";
             var httpContext = new DefaultHttpContext();
-            Assert.IsTrue(0 > 1, "WOAH KENNY");
+            
             Assert.IsTrue(connString != null, $"connection should not be null!");
 
             //get initial count
@@ -41,7 +41,7 @@ namespace Resume
                 resultBeforeFunctionCall = tableEntity.views;
             }
 
-
+            Assert.IsTrue(0 > 1, "WOAH KENNY YOU GOT TO BEFORE THE AZ FUNCTION RUNS");
             //call function to get new count
             resultAfterFunctionCall = await Run(httpContext.Request);
 
