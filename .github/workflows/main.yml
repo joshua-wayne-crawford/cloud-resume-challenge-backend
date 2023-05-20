@@ -1,10 +1,10 @@
 name: dotnet package
 
 on: [push]
-env:
-  connection_string: ${{ secrets.DB_CONNECTION }}
 jobs:
   build:
+    env:
+      connection_string: ${{ secrets.DB_CONNECTION }}
     runs-on: windows-latest
     strategy:
       matrix:
