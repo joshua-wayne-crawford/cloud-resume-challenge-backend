@@ -4,6 +4,8 @@ on: [push]
 
 jobs:
   build:
+    env:
+      connection_string: ${{ secrets.CONNECTION_STRING }}
 
     runs-on: ubuntu-latest
     strategy:
