@@ -30,10 +30,10 @@ namespace Resume
             var httpContext = new DefaultHttpContext();
             
             Assert.IsTrue(connString != null, $"connection should not be null!");
-
+            Assert.IsTrue(0 > 1, "WOAH KENNY YOU GOT TO BEFORE THE AZ FUNCTION RUNS");
             //get initial count
             TableClient tableClient = new TableClient(connString, tableName);
-            Assert.IsTrue(0 > 1, "WOAH KENNY YOU GOT TO BEFORE THE AZ FUNCTION RUNS");
+            
             Pageable<TableEntity> results = tableClient.Query<TableEntity>(entity => entity.PartitionKey == "views");
 
             foreach (TableEntity tableEntity in results)
