@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet build --configuration Release --output ./output popd --no-restore
+        run: dotnet build --configuration Release --output ./output --no-restore
       - name: Test
         run: dotnet test --no-restore --verbosity normal
       - name: 'Run Azure Functions action'
