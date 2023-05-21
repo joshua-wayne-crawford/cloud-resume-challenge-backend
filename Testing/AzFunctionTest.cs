@@ -30,7 +30,7 @@ namespace Resume
             var httpContext = new DefaultHttpContext();
             
             Assert.IsTrue(connString != null, $"connection should not be null!");
-            //this is where the assertion flag gets to before things fail
+            
             //get initial count
             TableClient tableClient = new TableClient(connString, tableName);
             
