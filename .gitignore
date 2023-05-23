@@ -264,3 +264,5 @@ __pycache__/
 *.pyc
 
 app.settings.json 
+*.tfvars
+*.tfstate
