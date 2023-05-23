@@ -48,7 +48,7 @@ namespace Resume
         }
 
         [TestCleanup]
-        public static void CleanUp()
+        public void CleanUp()
         {
             var config = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory).AddJsonFile("local.settings.json", true, true).AddEnvironmentVariables().Build();
             Environment.SetEnvironmentVariable("connection_string", config["Values:connection_string"]);
